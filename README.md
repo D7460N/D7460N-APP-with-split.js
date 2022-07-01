@@ -1,1 +1,1 @@
-# D7460N-APP-with-resizer
+# D7460N-APP-with-split.js

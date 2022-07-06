@@ -18,12 +18,28 @@
          toggle-class: .open;
         }
       }
+      app-panel:if-empty(self):observe {
+        self {display: none;}
+      }
+      app-panel:nth-of-type(4):if-empty(self):observe {
+        display: none;
+        app-panel {
+          run: {=
+            Split({
+              columnGutters: [{
+                track: 2,
+                element: document.querySelector('app-panel:nth-of-type(4)'),
+              }]
+            });
+          =};
+        }
+      }
     </style>
   </head>
 
   <body style="opacity: 0.0; transition: opacity 1s ease-in-out;">
     <script>0</script>
-    <app-container>
+    <app-container id="container">
       <app-panel>D7460N</app-panel>
       <app-panel>
         <h2>NAV</h2>
@@ -135,6 +151,7 @@
         </panel-list>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>	
       </app-panel>
+      <app-panel>:</app-panel>
       <app-panel>
         <h2>ASIDE</h2>
         <small>Header Subtitle</small>
@@ -144,6 +161,7 @@
     </app-container>
 
     <script type="text/javascript" charset="utf-8" src="assets/js/activecss-dev-2-11-0.min.js"></script>
+    <script src="https://unpkg.com/split-grid/dist/split-grid.js"></script>
     <script type="text/javascript" charset="utf-8" src="assets/js/scripts.js"></script>
     <noscript><style>body {opacity: 1.0;}</style></noscript>
   </body>

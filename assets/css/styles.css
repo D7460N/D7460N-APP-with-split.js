@@ -1,5 +1,4 @@
 /* https://stackoverflow.com/questions/46044589/dynamically-resize-columns-in-css-grid-layout-with-mouse */
-
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300&display=swap');
 @import url('https://fonts.cdnfonts.com/css/agencyfb-2');
 *:before, *:after, *, ::after, ::before {box-sizing: border-box;}
@@ -7,6 +6,7 @@ body, html {
   background: linear-gradient(#182c38, #101925);
   background-size: cover;
   overflow: hidden;
+  counter-reset: column;
 }
 body {
   font-family: 'Oxanium', sans-serif;
@@ -19,7 +19,10 @@ body {
 
 app-container {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(var(--columns), auto);
+  /* grid-auto-flow: column; */
+  /* grid-template-columns: repeat(var(--columns), auto); */
+  /* grid-template-columns: auto;  Dynamic number of columns */
   grid-template-rows: auto 1fr auto;
   gap: 1rem;
   padding: 1rem;
@@ -37,6 +40,16 @@ app-panel {
   align-content: start;
   justify-content: start;
 }
+/* :root {
+  --columns: column;
+}
+app-panel::before {
+  counter-increment: column;
+  content: counter(var(--columns));
+}
+app-container {
+  grid-template-columns: repeat(var(--columns), auto);
+} */
 
 /* HEADER/FOOTER */
 app-panel:first-of-type,
@@ -56,11 +69,22 @@ app-panel:nth-of-type(2) {
 
 /* SEARCH RESULTS */
 app-panel:nth-of-type(3) {
-  resize: horizontal;
   overflow: auto;
   min-width: 20rem;
   max-width: 60vw;
 }
+
+/* SPLITTER */
+app-panel:nth-of-type(4) {
+  width: 5px;
+  border: none;
+  background-color: rgba(255,255,255,0.1);
+  cursor: col-resize;
+  transition: background-color 250ms;
+}
+
+app-panel:nth-of-type(4):hover {background-color: rgba(117,193,255,0.5);}
+app-panel:nth-of-type(4):active {background-color: rgba(117,193,255,1.0);}
 
 p, h2 {
   margin: 0;

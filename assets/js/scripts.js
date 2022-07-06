@@ -13,6 +13,10 @@ let domReady = (cb) => {
 domReady(() => {
   // Display body when DOM is loaded
   document.body.style.opacity = '1.0';
-}); 
+});
 
 // --------------------------------------------------------------------------------- //
+// Update number of columns
+const count = document.getElementsByTagName('app-panel').length - 2;
+
+container.style.cssText = `--columns: ${count}`;
